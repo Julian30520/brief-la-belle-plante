@@ -13,7 +13,7 @@
                     {{ category }}
                 </label>
             </div>
-            <div *ngIf="listCategories.length == 0 ">S
+            <div *ngIf="listCategories.length == 0 ">
                 Aucune catégorie disponible
             </div>
         </div>
@@ -37,7 +37,7 @@
             
             <div class="flex-column justify-content-start">
                 <app-avis-bar></app-avis-bar>
-                <a href="#" class="btn btn-success me-2">Valider</a>
+                <button class="btn btn-success me-2" (click)="onSendRating()">Valider</button>
             </div>
         </div>
     </ul>

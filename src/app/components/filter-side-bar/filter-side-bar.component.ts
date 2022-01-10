@@ -15,4 +15,8 @@ export class FilterSideBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSendRating():void {
+    console.log("coucou");
+  }
+
 }
