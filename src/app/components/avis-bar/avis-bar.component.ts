@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-avis-bar',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvisBarComponent implements OnInit {
   starStates: {stateSelectedUser : boolean, stateHoverUser : boolean}[];
+  @Output() stateNumber = new EventEmitter
   starStateNumber: number = 0;
 
   constructor() {
@@ -61,6 +62,7 @@ export class AvisBarComponent implements OnInit {
       }
     }
     //console.log(`Rating : ${this.starStateNumber}`);
+    this.stateNumber.emit(this.starStateNumber);
   }
 
 }
