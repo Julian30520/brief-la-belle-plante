@@ -36,7 +36,7 @@
             <p class="mb-1 fs-5 fw-semibold">Avis</p>
             
             <div class="flex-column justify-content-start">
-                <app-avis-bar></app-avis-bar>
+                <app-avis-bar (stateNumber)="onStateNumberChange($event)"></app-avis-bar>
                 <button class="btn btn-success me-2" (click)="onSendRating()">Valider</button>
             </div>
         </div>

@@ -9,10 +9,12 @@ import * as _ from 'underscore';
 })
 export class PageAccueilComponent implements OnInit {
   public listData: any[];
+  public listRate: any[];
   public listCategoriesFilter: string[];
 
   constructor(private plantouneService: PlantouneService) {
     this.listData = [];
+    this.listRate = [];
     this.listCategoriesFilter = [];
    }
 
@@ -54,12 +56,24 @@ export class PageAccueilComponent implements OnInit {
         this.listCategoriesFilter = listUniqJsCategories;
         this.listData = listPlant;
         this.listData.length = 9;
+        console.log(this.listData);
       }
     )
   }
 
   onEventLike() {
     this.plantouneService.plantLiked$.next('')
+  }
+
+  onRatingFilter(stateNumber: number): void {
+    console.log(stateNumber);
+    this.listData.forEach(product => {
+      if(product.product_rating >= stateNumber) {
+        this.listRate.push(product);
+      }
+    });
+    this.listData = this.listRate;
+    console.log(this.listData);
   }
 
 }

@@ -1,5 +1,5 @@
 <div class="d-flex align-items-stretch">
-    <app-filter-side-bar [listCategories]="listCategoriesFilter"></app-filter-side-bar>
+    <app-filter-side-bar [listCategories]="listCategoriesFilter" (stateNumber)="onRatingFilter($event)"></app-filter-side-bar>
 
     <div class="custom-main container p-3">
         <input class="form-control" 
