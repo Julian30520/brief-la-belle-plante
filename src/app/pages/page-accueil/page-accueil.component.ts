@@ -67,13 +67,14 @@ export class PageAccueilComponent implements OnInit {
 
   onRatingFilter(stateNumber: number): void {
     console.log(stateNumber);
+    this.listRate = [];
     this.listData.forEach(product => {
       if(product.product_rating >= stateNumber) {
         this.listRate.push(product);
       }
     });
-    this.listData = this.listRate;
-    console.log(this.listData);
+    //this.listData = this.listRate;
+    console.log(this.listRate);
   }
 
 }
