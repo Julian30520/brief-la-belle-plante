@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PlantouneService } from 'src/app/services/plantoune.service';
 import * as _ from 'underscore';
 
+
+
+
 @Component({
   selector: 'app-page-accueil',
   templateUrl: './page-accueil.component.html',
@@ -33,10 +36,10 @@ export class PageAccueilComponent implements OnInit {
    }
 
    /**
-    * equivalent de la ligne du dessus 
-    * 
+    * equivalent de la ligne du dessus
+    *
     * plantouneService;
-    * 
+    *
     * constructor(plantouneService: PlantouneService) {
     *   this.plantouneService = plantouneService;
     * }
@@ -57,11 +60,12 @@ export class PageAccueilComponent implements OnInit {
          * Technique avec Underscore JS pour recupérer les catégories uniques de nos plantes
          */
         const listAllCategories = listPlant.map(product => product.product_breadcrumb_label);
-        console.log(listAllCategories);
-        
-        const listUniqCategories = _.uniq(listAllCategories) 
-        console.log(listUniqCategories);
-        
+        // console.log(listAllCategories);
+
+        const listUniqCategories = _.uniq(listAllCategories)
+        // console.log(listUniqCategories);
+
+
 
         /**
          * Technique native JS pour recupérer les catégories uniques de nos plantes
@@ -73,6 +77,7 @@ export class PageAccueilComponent implements OnInit {
         this.listCategoriesFilter = listUniqJsCategories;
         this.listData = listPlant;
         this.listData.length = 9;
+
         console.log(this.listData);
       }
     )
@@ -133,5 +138,4 @@ export class PageAccueilComponent implements OnInit {
     
     if(this.listData.length >= 9) this.listData.length = 9;
   }
-
 }
