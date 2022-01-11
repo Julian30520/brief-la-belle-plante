@@ -13,14 +13,23 @@ export class PageAccueilComponent implements OnInit {
   public listDataFilter: any[];
   public listCategoriesFilter: string[];
 
-  public indexFilter: number;
+  public rangeNumber: number[];
+  public stateNumber: number;
+
+  public isPricingFilterActive: boolean;
+  public isRatingFilterActive: boolean;
 
   constructor(private plantouneService: PlantouneService) {
     this.listData = [];
     this.listDataGlobal = [];
     this.listDataFilter = [];
     this.listCategoriesFilter = [];
-    this.indexFilter = 0;
+
+    this.rangeNumber = [];
+    this.stateNumber = 0;
+
+    this.isPricingFilterActive = false;
+    this.isRatingFilterActive = false;
    }
 
    /**
@@ -74,57 +83,55 @@ export class PageAccueilComponent implements OnInit {
   }
 
   onRatingFilter(stateNumber: number): void {
-    let listRate: any[] = [];
-    if(this.indexFilter == 0) {
-      this.indexFilter++;
-      this.listDataGlobal.forEach(product => {
-        if(product.product_rating >= stateNumber) {
-          listRate.push(product);
-        }
-      });
-    } else {
-      this.listData.forEach(product => {
-        if(product.product_rating >= stateNumber) {
-          listRate.push(product);
-        }
-      });
-    }
+    this.stateNumber = stateNumber;
+    this.isRatingFilterActive = true;
     
-    this.onApplyFilters(listRate);
+    this.onApplyFilters();
   }
 
   onPriceFilter(rangeNumber: number[]) {
-    console.log(rangeNumber);
-    let listRangedProduct: any[] = [];
-    if(this.indexFilter == 0) {
-      this.indexFilter++;
-      this.listDataGlobal.forEach(product => {
-        if(parseFloat(product.product_unitprice_ati) >= rangeNumber[0] && parseFloat(product.product_unitprice_ati) <= rangeNumber[1]) {
-          listRangedProduct.push(product);
-        }
-      });
-    } else {
-      this.listData.forEach(product => {
-        if(parseFloat(product.product_unitprice_ati) >= rangeNumber[0] && parseFloat(product.product_unitprice_ati) <= rangeNumber[1]) {
-          listRangedProduct.push(product);
-        }
-      });
-    }
+    this.rangeNumber = [...rangeNumber];
+    this.isPricingFilterActive = true;
     
-    this.onApplyFilters(listRangedProduct);
+    this.onApplyFilters();
   }
 
-  onApplyFilters(DataFilter: any[]): void {
-    /*if(this.indexFilter == 0) {
-      this.listData = [...DataFilter];
-      this.indexFilter++;
-    } else {
-      this.listDataFilter = [...this.listData];
-    }*/
+  onApplyFilters(): void {
 
-    this.listData = [...DataFilter];
+    if(this.isPricingFilterActive) {
+      let listDataFinal: any = [];
+      this.listDataGlobal.forEach(product => {
+        if(parseFloat(product.product_unitprice_ati) >= this.rangeNumber[0] && parseFloat(product.product_unitprice_ati) <= this.rangeNumber[1]) {
+          listDataFinal.push(product);
+        }
+      });
+      this.listData = [...listDataFinal];
+    }
+
+    if(this.isRatingFilterActive) {
+      let listDataFinal: any = [];
+      this.listDataGlobal.forEach(product => {
+        if(product.product_rating >= this.stateNumber) {
+          listDataFinal.push(product);
+        }
+      });
+      this.listData = [...listDataFinal];
+    }
+
+    if(this.isPricingFilterActive && this.isRatingFilterActive) {
+      let listDataFinal: any = [];
+      this.listDataGlobal.forEach(product => {
+        if(parseFloat(product.product_unitprice_ati) >= this.rangeNumber[0] 
+        && parseFloat(product.product_unitprice_ati) <= this.rangeNumber[1]
+        && product.product_rating >= this.stateNumber) {
+          listDataFinal.push(product);
+        }
+      });
+      this.listData = [...listDataFinal];
+      console.log(this.listData);
+    }
     
-    //if(this.listData.length >= 9) this.listData.length = 9;
+    if(this.listData.length >= 9) this.listData.length = 9;
   }
 
 }
