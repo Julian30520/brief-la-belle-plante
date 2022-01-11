@@ -22,6 +22,8 @@ export class PageAccueilComponent implements OnInit {
   public isPricingFilterActive: boolean;
   public isRatingFilterActive: boolean;
 
+  public clickCounter : any;
+
   constructor(private plantouneService: PlantouneService) {
     this.listData = [];
     this.listDataGlobal = [];
@@ -33,6 +35,8 @@ export class PageAccueilComponent implements OnInit {
 
     this.isPricingFilterActive = false;
     this.isRatingFilterActive = false;
+
+    this.clickCounter = 0;
    }
 
    /**
@@ -102,6 +106,7 @@ export class PageAccueilComponent implements OnInit {
   }
 
   onApplyFilters(): void {
+    this.clickCounter = 0;
 
     if(this.isPricingFilterActive) {
       let listDataFinal: any = [];
@@ -138,4 +143,37 @@ export class PageAccueilComponent implements OnInit {
     
     if(this.listData.length >= 9) this.listData.length = 9;
   }
+
+    //Tri des prix des plantes par ordre croissant ou décroissant
+onPriceTri() : void {
+
+  this.clickCounter ++
+  console.log(this.clickCounter)
+    if (this.clickCounter %2) {
+      this.listData.sort((a, b) => parseFloat(a.product_price) - parseFloat(b.product_price));
+      }else{
+      this.listData.sort((a, b) => parseFloat(b.product_price) - parseFloat(a.product_price));
+      }
+    }
+  
+    //Tri des noms des plantes par ordre alphanumérique
+  onAlphaTri() : void {
+  
+    this.clickCounter ++
+    if (this.clickCounter %2) {
+      this.listData.sort((a, b) => (a.product_name > b.product_name) ? 1 : -1)
+      }else{
+      this.listData.sort((a, b) => (b.product_name > a.product_name) ? 1 : -1)
+    }
+  }
+  
+  //Tri des avis des plantes par ordre croissant ou décroissant
+  onRatingTri() : void{
+    this.clickCounter ++
+    if (this.clickCounter %2) {
+      this.listData.sort((a, b) => (a.product_rating > b.product_rating) ? 1 : -1)
+      }else{
+      this.listData.sort((a, b) => (b.product_rating > a.product_rating) ? 1 : -1)
+      }
+    }
 }
