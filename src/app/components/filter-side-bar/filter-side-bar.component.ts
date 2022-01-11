@@ -8,9 +8,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class FilterSideBarComponent implements OnInit {
   @Input() listCategories: string[];
   @Output() stateNumber = new EventEmitter();
+  @Output() rangeNumber = new EventEmitter();
   filterStateNumber: number = 0;
-
-  constructor() {
+  
+  constructor() { 
     this.listCategories = [];
   }
 
@@ -25,4 +26,9 @@ export class FilterSideBarComponent implements OnInit {
     this.stateNumber.emit(this.filterStateNumber);
   }
 
+  onSendValues(minNum: any, maxNum: any): void {
+    let rangeArray: number[] = [parseFloat(minNum.value), parseFloat(maxNum.value)];
+    console.log(typeof(rangeArray[0]));
+    this.rangeNumber.emit(rangeArray);
+  }
 }
