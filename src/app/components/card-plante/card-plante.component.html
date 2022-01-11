@@ -1,7 +1,7 @@
-<div class="plant card mb-4" style="width: 14rem;">
-    <app-icon class="like" 
-            [iconName]="'heart'" 
-            [iconColor]="'#e35d6a'" 
+<div class="plant card mb-4" style="width: 14rem;" (click) = "onGetId(plant.product_id)">
+    <app-icon class="like"
+            [iconName]="'heart'"
+            [iconColor]="'#e35d6a'"
             (click)="onClickLike()"></app-icon>
     <img src="{{plant.product_url_picture}}" class="card-img-top" alt="Image de {{ plant.product_name }}">
     <div class="card-body">
@@ -9,7 +9,7 @@
         <div class="card-content">
             <app-avis-bar></app-avis-bar>
         </div>
-        
+
         <div class="d-flex flex-row align-items-end justify-content-between">
             <div class="card-content">
                 {{ plant.product_unitprice_ati }} €
