@@ -9,11 +9,13 @@ import * as _ from 'underscore';
 })
 export class PageAccueilComponent implements OnInit {
   public listData: any[];
+  public listDataGlobal: any[];
   public listRate: any[];
   public listCategoriesFilter: string[];
 
   constructor(private plantouneService: PlantouneService) {
     this.listData = [];
+    this.listDataGlobal = [];
     this.listRate = [];
     this.listCategoriesFilter = [];
    }
@@ -35,6 +37,8 @@ export class PageAccueilComponent implements OnInit {
     this.plantouneService.getData().subscribe(
       (listPlant: any[]) => {
         console.log(listPlant);
+        this.listDataGlobal = [...listPlant];
+        console.log(this.listDataGlobal);
 
         /**
          * Technique avec Underscore JS pour recupérer les catégories uniques de nos plantes
@@ -68,7 +72,7 @@ export class PageAccueilComponent implements OnInit {
   onRatingFilter(stateNumber: number): void {
     console.log(stateNumber);
     this.listRate = [];
-    this.listData.forEach(product => {
+    this.listDataGlobal.forEach(product => {
       if(product.product_rating >= stateNumber) {
         this.listRate.push(product);
       }
