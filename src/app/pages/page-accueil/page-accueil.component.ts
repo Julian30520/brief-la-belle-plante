@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlantouneService } from 'src/app/services/plantoune.service';
 import * as _ from 'underscore';
+import { contains, includes } from 'underscore';
 
 
 
@@ -47,10 +48,8 @@ export class PageAccueilComponent implements OnInit {
     * plantouneService;
     *
     * constructor(plantouneService: PlantouneService) {
-    *   this.plantouneService = plantouneService;
-    * }
+    *   this.plantouneService = plantouneService; }
     */
-
 
 
   ngOnInit(): void {
@@ -81,7 +80,7 @@ export class PageAccueilComponent implements OnInit {
         console.log(listUniqJsCategories);
 
         this.listCategoriesFilter = listUniqJsCategories;
-        this.listData = listPlant;
+        this.listData = [...listPlant];
         this.listData.length = 9;
 
         console.log(this.listData);
@@ -92,6 +91,23 @@ export class PageAccueilComponent implements OnInit {
   onEventLike() {
     this.plantouneService.plantLiked$.next('')
   }
+
+onRecherchePlante(choix: any) {
+
+    const search = choix.target.value 
+    console.log(search);
+    this.listData = this.listDataGlobal.filter((plant) => {
+      if(plant.product_name.toLowerCase().includes(search.toLowerCase())){
+        return plant;
+      }
+    });
+    //Equivaut à la ligne ci-dessous (version abrégée)
+    //this.listData = this.listDataGlobal.filter((plant) => plant.product_name.toLowerCase().includes(search.toLowerCase()))
+    console.log(this.listData);
+    if (this.listData.length >= 9) {this.listData.length=9}
+  }
+
+}
 
   onListCategory(categoryArray: string[]) {
    // this.listData=listData;
@@ -204,3 +220,4 @@ onPriceTri() : void {
       }
     }
 }
+
