@@ -22,12 +22,12 @@
         <div class="p-3">
             <p class="mb-1 fs-5 fw-semibold">Prix</p>
             <div class="d-flex justify-content-center">
-                <input id="number" type="number" placeholder="min" min=0 value="" class="me-2" style="width: 45%;">
-                <input id="number" type="number" placeholder="max" value="" class="me-2" style="width: 45%;">
+                <input #minNum id="numberMin" type="number" placeholder="min" min=0 value="" class="me-2" style="width: 45%;">
+                <input #maxNum id="numberMax" type="number" placeholder="max" value="" class="me-2" style="width: 45%;">
             </div>
 
             <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-success m-3">Valider</a>
+                <button class="btn btn-success m-3" (click)="onSendValues(minNum, maxNum)">Valider</button>
             </div>
         </div>
     </ul>

@@ -10,13 +10,11 @@ import * as _ from 'underscore';
 export class PageAccueilComponent implements OnInit {
   public listData: any[];
   public listDataGlobal: any[];
-  public listRate: any[];
   public listCategoriesFilter: string[];
 
   constructor(private plantouneService: PlantouneService) {
     this.listData = [];
     this.listDataGlobal = [];
-    this.listRate = [];
     this.listCategoriesFilter = [];
    }
 
@@ -70,15 +68,25 @@ export class PageAccueilComponent implements OnInit {
   }
 
   onRatingFilter(stateNumber: number): void {
-    console.log(stateNumber);
-    this.listRate = [];
+    let listRate: any[] = [];
     this.listDataGlobal.forEach(product => {
       if(product.product_rating >= stateNumber) {
-        this.listRate.push(product);
+        listRate.push(product);
       }
     });
-    console.log(this.listRate);
-    this.listData = [...this.listRate];
+    this.listData = [...listRate];
+    if(this.listData.length >= 9) this.listData.length = 9;
+  }
+
+  onPriceFilter(rangeNumber: number[]) {
+    console.log(rangeNumber);
+    let listRangedProduct: any[] = [];
+    this.listDataGlobal.forEach(product => {
+      if(parseFloat(product.product_unitprice_ati) >= rangeNumber[0] && parseFloat(product.product_unitprice_ati) <= rangeNumber[1]) {
+        listRangedProduct.push(product);
+      }
+    });
+    this.listData = [...listRangedProduct];
     if(this.listData.length >= 9) this.listData.length = 9;
   }
 
