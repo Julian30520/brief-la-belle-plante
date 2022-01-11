@@ -12,17 +12,17 @@ import * as _ from 'underscore';
 })
 export class PageAccueilComponent implements OnInit {
   public listData: any[];
-  public listRate: any[];
   public listPricePlant : any[];
   public clickCounter : any;
+  public listDataGlobal : any[];
 
   public listCategoriesFilter: string[];
 
   constructor(private plantouneService: PlantouneService) {
     this.listData = [];
-    this.listRate = [];
     this.listCategoriesFilter = [];
     this.listPricePlant = [];
+    this.listDataGlobal = [];
     this.clickCounter = 0;
 
    }
@@ -36,8 +36,6 @@ export class PageAccueilComponent implements OnInit {
     *   this.plantouneService = plantouneService;
     * }
     */
-
-
 
   ngOnInit(): void {
 
@@ -67,12 +65,15 @@ export class PageAccueilComponent implements OnInit {
         this.listData = listPlant;
         this.listData.length = 9;
         // console.log(this.listData);
+
+        this.listDataGlobal = [...listPlant]
+        console.log("coucou" + this.listDataGlobal);
       }
     )
   }
 
   onEventLike() {
-    this.plantouneService.plantLiked$.next('')
+    this.plantouneService.plantLiked$.next('');
   }
 
   //Tri des prix des plantes par ordre croissant ou décroissant
@@ -81,9 +82,9 @@ onPriceTri() : void {
 this.clickCounter ++
 console.log(this.clickCounter)
   if (this.clickCounter %2) {
-    this.listData.sort((a, b) => parseFloat(b.product_price) - parseFloat(a.product_price));
-    }else{
     this.listData.sort((a, b) => parseFloat(a.product_price) - parseFloat(b.product_price));
+    }else{
+    this.listData.sort((a, b) => parseFloat(b.product_price) - parseFloat(a.product_price));
     }
   }
 
