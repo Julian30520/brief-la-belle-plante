@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-filter-side-bar',
@@ -7,12 +8,35 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class FilterSideBarComponent implements OnInit {
   @Input() listCategories: string[];
-  
-  constructor() { 
+  @Output() checkCategory = new EventEmitter();
+  public selectedCategory: string[];
+
+
+  constructor() {
     this.listCategories = [];
+    this.selectedCategory = [];
   }
 
   ngOnInit(): void {
+  }
+
+  onCheckCategory(category: string, event: any) {
+    console.log(event)
+
+
+    if (event.target.checked == true) {
+      //console.log("true")
+      this.selectedCategory.push(category);
+
+
+    }
+    if (event.target.checked == false) {
+      //console.log("false")
+      this.selectedCategory = this.selectedCategory.filter(product => product !== category);
+    }
+
+    this.checkCategory.emit(this.selectedCategory);
+    //console.log("romain" , this.selectedCategory)
   }
 
 }

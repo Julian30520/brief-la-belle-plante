@@ -1,5 +1,5 @@
 <div class="d-flex align-items-stretch">
-    <app-filter-side-bar [listCategories]="listCategoriesFilter"></app-filter-side-bar>
+    <app-filter-side-bar [listCategories]="listCategoriesFilter" (checkCategory)="onListCategory($event)"></app-filter-side-bar>
 
     <div class="custom-main container p-3">
         <input class="form-control" 
@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col" *ngFor="let product of listData">
                 <app-card-plante [plant]="product" 
-                            (clickLike)="onEventLike()">
+                            (clickLike)="onEventLike()" >
                 </app-card-plante>
             </div>
         </div>

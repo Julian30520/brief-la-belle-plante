@@ -9,10 +9,14 @@ import * as _ from 'underscore';
 })
 export class PageAccueilComponent implements OnInit {
   public listData: any[];
+  public listDataGlobal : any[];
   public listCategoriesFilter: string[];
+  public dataFilterCategory : any;
+  
 
   constructor(private plantouneService: PlantouneService) {
     this.listData = [];
+    this.listDataGlobal=[];
     this.listCategoriesFilter = [];
    }
 
@@ -33,7 +37,8 @@ export class PageAccueilComponent implements OnInit {
     this.plantouneService.getData().subscribe(
       (listPlant: any[]) => {
         console.log(listPlant);
-
+        this.listDataGlobal=[...listPlant];
+        console.log(this.listDataGlobal);
         /**
          * Technique avec Underscore JS pour recupérer les catégories uniques de nos plantes
          */
@@ -54,6 +59,8 @@ export class PageAccueilComponent implements OnInit {
         this.listCategoriesFilter = listUniqJsCategories;
         this.listData = listPlant;
         this.listData.length = 9;
+
+
       }
     )
   }
@@ -61,5 +68,31 @@ export class PageAccueilComponent implements OnInit {
   onEventLike() {
     this.plantouneService.plantLiked$.next('')
   }
+
+  onListCategory(categoryArray: string[]) {
+   // this.listData=listData;
+    //console.log(typeof(valueText));
+
+    if(categoryArray.length == 0) {
+      this.listData = [...this.listDataGlobal];
+
+    } else if(categoryArray.length > 0) {
+      let listProductsByCategory:string[] = [];
+      this.listDataGlobal.forEach(product => {
+
+        categoryArray.forEach(categorySelected => {
+          if (product.product_breadcrumb_label == categorySelected){
+            listProductsByCategory.push(product);
+          }
+        });
+      });
+    this.listData= [...listProductsByCategory];
+    }
+
+  if(this.listData.length>=9){
+    this.listData.length=9;
+  }
+}
+
 
 }
