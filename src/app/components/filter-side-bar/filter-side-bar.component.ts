@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-filter-side-bar',
@@ -7,12 +7,22 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class FilterSideBarComponent implements OnInit {
   @Input() listCategories: string[];
-  
-  constructor() { 
+  @Output() stateNumber = new EventEmitter();
+  filterStateNumber: number = 0;
+
+  constructor() {
     this.listCategories = [];
   }
 
   ngOnInit(): void {
+  }
+
+  onStateNumberChange(stateNumber: number): void {
+    this.filterStateNumber = stateNumber;
+  }
+
+  onSendRating():void {
+    this.stateNumber.emit(this.filterStateNumber);
   }
 
 }
