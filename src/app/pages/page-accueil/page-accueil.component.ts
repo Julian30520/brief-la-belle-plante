@@ -77,8 +77,9 @@ export class PageAccueilComponent implements OnInit {
         this.listRate.push(product);
       }
     });
-    //this.listData = this.listRate;
     console.log(this.listRate);
+    this.listData = [...this.listRate];
+    if(this.listData.length >= 9) this.listData.length = 9;
   }
 
 }
