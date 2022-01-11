@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlantouneService } from 'src/app/services/plantoune.service';
 import * as _ from 'underscore';
+import { contains, includes } from 'underscore';
 
 @Component({
   selector: 'app-page-accueil',
@@ -9,30 +10,30 @@ import * as _ from 'underscore';
 })
 export class PageAccueilComponent implements OnInit {
   public listData: any[];
+  public listDataGlobal : any[];
   public listCategoriesFilter: string[];
 
   constructor(private plantouneService: PlantouneService) {
     this.listData = [];
+    this.listDataGlobal! = [];
     this.listCategoriesFilter = [];
    }
 
    /**
     * equivalent de la ligne du dessus 
-    * 
     * plantouneService;
-    * 
     * constructor(plantouneService: PlantouneService) {
-    *   this.plantouneService = plantouneService;
-    * }
+    *   this.plantouneService = plantouneService; }
     */
-
 
 
   ngOnInit(): void {
 
     this.plantouneService.getData().subscribe(
       (listPlant: any[]) => {
-        console.log(listPlant);
+      console.log("Liste Plant : ", listPlant);
+    
+      this.listDataGlobal = [... listPlant];
 
         /**
          * Technique avec Underscore JS pour recupérer les catégories uniques de nos plantes
@@ -52,14 +53,31 @@ export class PageAccueilComponent implements OnInit {
         console.log(listUniqJsCategories);
 
         this.listCategoriesFilter = listUniqJsCategories;
-        this.listData = listPlant;
+        this.listData = [...listPlant];
         this.listData.length = 9;
+     
       }
     )
   }
 
   onEventLike() {
     this.plantouneService.plantLiked$.next('')
+  }
+
+
+onRecherchePlante(choix: any) {
+
+    const search = choix.target.value 
+    console.log(search);
+    this.listData = this.listDataGlobal.filter((plant) => {
+      if(plant.product_name.toLowerCase().includes(search.toLowerCase())){
+        return plant;
+      }
+    });
+    //Equivaut à la ligne ci-dessous (version abrégée)
+    //this.listData = this.listDataGlobal.filter((plant) => plant.product_name.toLowerCase().includes(search.toLowerCase()))
+    console.log(this.listData);
+    if (this.listData.length >= 9) {this.listData.length=9}
   }
 
 }
