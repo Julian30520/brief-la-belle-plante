@@ -1,11 +1,11 @@
 <div class="custom-side-bar flex-shrink-0 bg-white border-end">
-    <div class="p-3">
-        <span class="fs-5 fw-semibold">Filtres</span>
-    </div>
-    <ul class="list-unstyled ps-0 border-top">
-        <div class="p-3">
-            <p class="mb-1 fs-5 fw-semibold">Catégories</p>
-            <div *ngFor="let category of listCategories; let indexCat = index" class="form-check">
+  <div class="p-3">
+      <span class="fs-5 fw-semibold">Filtres</span>
+  </div>
+  <ul class="list-unstyled ps-0 border-top">
+      <div class="p-3">
+          <p class="mb-1 fs-5 fw-semibold">Catégories</p>
+          <div *ngFor="let category of listCategories; let indexCat = index" class="form-check">
 
                 <input class="form-check-input" type="checkbox" value="testcategory" id="checkBoxCategory{{indexCat}}" (click)="onCheckCategory(category,$event)">
 
@@ -13,7 +13,7 @@
                     {{ category }}
                 </label>
             </div>
-            <div *ngIf="listCategories.length == 0 ">S
+            <div *ngIf="listCategories.length == 0 ">
                 Aucune catégorie disponible
             </div>
         </div>
@@ -22,12 +22,12 @@
         <div class="p-3">
             <p class="mb-1 fs-5 fw-semibold">Prix</p>
             <div class="d-flex justify-content-center">
-                <input id="number" type="number" placeholder="min" min=0 value="" class="me-2" style="width: 45%;">
-                <input id="number" type="number" placeholder="max" value="" class="me-2" style="width: 45%;">
+                <input #minNum id="numberMin" type="number" placeholder="min" min=0 value="" class="me-2" style="width: 45%;">
+                <input #maxNum id="numberMax" type="number" placeholder="max" value="" class="me-2" style="width: 45%;">
             </div>
 
             <div class="d-flex justify-content-center">
-                <a href="#" class="btn btn-success m-3">Valider</a>
+                <button class="btn btn-success m-3" (click)="onSendValues(minNum, maxNum)">Valider</button>
             </div>
         </div>
     </ul>
@@ -36,8 +36,8 @@
             <p class="mb-1 fs-5 fw-semibold">Avis</p>
             
             <div class="flex-column justify-content-start">
-                <app-avis-bar></app-avis-bar>
-                <a href="#" class="btn btn-success me-2">Valider</a>
+                <app-avis-bar (stateNumber)="onStateNumberChange($event)"></app-avis-bar>
+                <button class="btn btn-success me-2" (click)="onSendRating()">Valider</button>
             </div>
         </div>
     </ul>

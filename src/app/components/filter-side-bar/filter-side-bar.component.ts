@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-
 @Component({
   selector: 'app-filter-side-bar',
   templateUrl: './filter-side-bar.component.html',
@@ -9,6 +8,9 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 export class FilterSideBarComponent implements OnInit {
   @Input() listCategories: string[];
   @Output() checkCategory = new EventEmitter();
+  @Output() stateNumber = new EventEmitter();
+  @Output() rangeNumber = new EventEmitter();
+  filterStateNumber: number = 0;
   public selectedCategory: string[];
 
 
@@ -39,4 +41,17 @@ export class FilterSideBarComponent implements OnInit {
     //console.log("romain" , this.selectedCategory)
   }
 
+  onStateNumberChange(stateNumber: number): void {
+    this.filterStateNumber = stateNumber;
+  }
+
+  onSendRating():void {
+    this.stateNumber.emit(this.filterStateNumber);
+  }
+
+  onSendValues(minNum: any, maxNum: any): void {
+    let rangeArray: number[] = [parseFloat(minNum.value), parseFloat(maxNum.value)];
+    console.log(typeof(rangeArray[0]));
+    this.rangeNumber.emit(rangeArray);
+  }
 }
