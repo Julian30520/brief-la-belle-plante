@@ -10,12 +10,17 @@ import * as _ from 'underscore';
 export class PageAccueilComponent implements OnInit {
   public listData: any[];
   public listDataGlobal: any[];
+  public listDataFilter: any[];
   public listCategoriesFilter: string[];
+
+  public indexFilter: number;
 
   constructor(private plantouneService: PlantouneService) {
     this.listData = [];
     this.listDataGlobal = [];
+    this.listDataFilter = [];
     this.listCategoriesFilter = [];
+    this.indexFilter = 0;
    }
 
    /**
@@ -36,6 +41,7 @@ export class PageAccueilComponent implements OnInit {
       (listPlant: any[]) => {
         console.log(listPlant);
         this.listDataGlobal = [...listPlant];
+        this.listDataFilter = [...this.listDataGlobal];
         console.log(this.listDataGlobal);
 
         /**
@@ -69,25 +75,56 @@ export class PageAccueilComponent implements OnInit {
 
   onRatingFilter(stateNumber: number): void {
     let listRate: any[] = [];
-    this.listDataGlobal.forEach(product => {
-      if(product.product_rating >= stateNumber) {
-        listRate.push(product);
-      }
-    });
-    this.listData = [...listRate];
-    if(this.listData.length >= 9) this.listData.length = 9;
+    if(this.indexFilter == 0) {
+      this.indexFilter++;
+      this.listDataGlobal.forEach(product => {
+        if(product.product_rating >= stateNumber) {
+          listRate.push(product);
+        }
+      });
+    } else {
+      this.listData.forEach(product => {
+        if(product.product_rating >= stateNumber) {
+          listRate.push(product);
+        }
+      });
+    }
+    
+    this.onApplyFilters(listRate);
   }
 
   onPriceFilter(rangeNumber: number[]) {
     console.log(rangeNumber);
     let listRangedProduct: any[] = [];
-    this.listDataGlobal.forEach(product => {
-      if(parseFloat(product.product_unitprice_ati) >= rangeNumber[0] && parseFloat(product.product_unitprice_ati) <= rangeNumber[1]) {
-        listRangedProduct.push(product);
-      }
-    });
-    this.listData = [...listRangedProduct];
-    if(this.listData.length >= 9) this.listData.length = 9;
+    if(this.indexFilter == 0) {
+      this.indexFilter++;
+      this.listDataGlobal.forEach(product => {
+        if(parseFloat(product.product_unitprice_ati) >= rangeNumber[0] && parseFloat(product.product_unitprice_ati) <= rangeNumber[1]) {
+          listRangedProduct.push(product);
+        }
+      });
+    } else {
+      this.listData.forEach(product => {
+        if(parseFloat(product.product_unitprice_ati) >= rangeNumber[0] && parseFloat(product.product_unitprice_ati) <= rangeNumber[1]) {
+          listRangedProduct.push(product);
+        }
+      });
+    }
+    
+    this.onApplyFilters(listRangedProduct);
+  }
+
+  onApplyFilters(DataFilter: any[]): void {
+    /*if(this.indexFilter == 0) {
+      this.listData = [...DataFilter];
+      this.indexFilter++;
+    } else {
+      this.listDataFilter = [...this.listData];
+    }*/
+
+    this.listData = [...DataFilter];
+    
+    //if(this.listData.length >= 9) this.listData.length = 9;
   }
 
 }
