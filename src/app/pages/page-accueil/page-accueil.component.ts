@@ -15,6 +15,8 @@ export class PageAccueilComponent implements OnInit {
   public listDataGlobal: any[];
   public listDataFilter: any[];
   public listCategoriesFilter: string[];
+  public dataFilterCategory : any;
+  
 
   public rangeNumber: number[];
   public stateNumber: number;
@@ -59,7 +61,7 @@ export class PageAccueilComponent implements OnInit {
         this.listDataGlobal = [...listPlant];
         this.listDataFilter = [...this.listDataGlobal];
         console.log(this.listDataGlobal);
-
+        
         /**
          * Technique avec Underscore JS pour recupérer les catégories uniques de nos plantes
          */
@@ -90,6 +92,31 @@ export class PageAccueilComponent implements OnInit {
   onEventLike() {
     this.plantouneService.plantLiked$.next('')
   }
+
+  onListCategory(categoryArray: string[]) {
+   // this.listData=listData;
+    //console.log(typeof(valueText));
+
+    if(categoryArray.length == 0) {
+      this.listData = [...this.listDataGlobal];
+
+    } else if(categoryArray.length > 0) {
+      let listProductsByCategory:string[] = [];
+      this.listDataGlobal.forEach(product => {
+
+        categoryArray.forEach(categorySelected => {
+          if (product.product_breadcrumb_label == categorySelected){
+            listProductsByCategory.push(product);
+          }
+        });
+      });
+    this.listData= [...listProductsByCategory];
+    }
+
+  if(this.listData.length>=9){
+    this.listData.length=9;
+  }
+}
 
   onRatingFilter(stateNumber: number): void {
     this.stateNumber = stateNumber;
