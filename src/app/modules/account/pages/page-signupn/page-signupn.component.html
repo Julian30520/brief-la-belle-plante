@@ -1,0 +1,18 @@
+<div class="signup-form text-center">
+    <main class="form-signup">
+        <form (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
+            <h1>Merci de vous inscrire</h1>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInput" placeholder="" name="email" required ngModel>
+                <label for="floatingInput">Adresse email</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="" name="password"
+                    required ngModel>
+                <label for="floatingPassword">Mot de passe</label>
+            </div>
+
+            <button class="w-100 btn btn-lg btn-success" type="submit" [disabled]="signupForm.invalid">Je m'inscris !</button>
+        </form>
+    </main>
+</div>
