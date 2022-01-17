@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'home', component: PageAccueilComponent },
-  { path: 'details/:productId', component: CardPlanteComponent  },
+  { path: 'details/:productId', component: PageDetailsComponent},
   {path : 'account',
    loadChildren : () => import('./modules/account/account.module')
    .then(m => m.AccountModule)
