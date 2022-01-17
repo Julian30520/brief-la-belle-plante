@@ -6,9 +6,14 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: PageAccueilComponent },
+  {
+    path: 'home', component: PageAccueilComponent },
   { path: 'details', component: PageDetailsComponent },
-  { path: '**', component: PageNotFoundComponent }
+  {path : 'account',
+   loadChildren : () => import('./modules/account/account.module')
+   .then(m => m.AccountModule)
+  },
+{ path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
