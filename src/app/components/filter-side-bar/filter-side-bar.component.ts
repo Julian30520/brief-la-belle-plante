@@ -31,5 +31,4 @@ export class FilterSideBarComponent implements OnInit {
     console.log(typeof(rangeArray[0]));
     this.rangeNumber.emit(rangeArray);
   }
-
 }
