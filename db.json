@@ -6059,6 +6059,18 @@
       "email": "coco@mail.com",
       "password": "$2a$10$UdJi398SK6x93IFAWNbYK.KlhZ.20E6vF7v/Va1HplivYQWrMMl2G",
       "id": 2
+    },
+    {
+      "email": "julian@mail.com",
+      "password": "$2a$10$Zvontm1V.XFZRRR7wE6vnuFlRBknKOZEPKnI1sLKes4uSa8HM7ci6",
+      "id": 3
+    },
+    {
+      "email": "zfzz@efzefz.com",
+      "password": "$2a$10$KVxyOURcblApZM4QvdxbzeodcCm9y3sxJHTsEdiI/nNxK36mHIMQy",
+      "firstName": "zfzfz",
+      "lastName": "fzfzfz",
+      "id": 4
     }
   ]
 }
