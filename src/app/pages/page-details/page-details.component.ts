@@ -10,13 +10,13 @@ import { PlantouneService } from 'src/app/services/plantoune.service';
 })
 export class PageDetailsComponent implements OnInit {
 
-  product : any;
- public listData : any[];
+  detailsPlant: any;
+  public listData: any[];
 
-    constructor(private route: ActivatedRoute, private plantouneService: PlantouneService) {
+  constructor(private route: ActivatedRoute, private plantouneService: PlantouneService) {
 
-      this.listData = [];
-   }
+    this.listData = [];
+  }
 
   ngOnInit(): void {
 
@@ -26,19 +26,23 @@ export class PageDetailsComponent implements OnInit {
 
         this.listData = listPlant;
 
-    
-    //ajoute le ProductId à l'url
-    const routeParams = this.route.snapshot.paramMap;
-    const productIdFromRoute = Number (routeParams.get('productId'));
 
-    //trouve le produit qui correspond à l'Id de la route
+        //ajoute le ProductId à l'url
+        const routeParams = this.route.snapshot.paramMap;
+        const productIdFromRoute = Number(routeParams.get('productId'));
 
-   this.product = this.listData.find (product => product.product_id === productIdFromRoute);
+        // Faire appel au service et récuperer et executer la requete http  et lui fournir le productId
+        this.plantouneService.getPlantById(productIdFromRoute).subscribe
+          (plant => {
+            this.detailsPlant = plant[0];
+            console.log(this.detailsPlant);
+          })
 
-  })
-}
 
-  test(id:any){
-  console.log(id);
+      })
+  }
+
+  test(id: any) {
+    console.log(id);
   }
 }

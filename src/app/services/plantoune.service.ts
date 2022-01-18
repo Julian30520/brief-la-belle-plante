@@ -11,6 +11,11 @@ export class PlantouneService {
   constructor(private httpClient: HttpClient) { }
 
   getData(): Observable<any[]> {
+    
     return this.httpClient.get<any[]>('http://localhost:3000/list_products');
+  }
+  
+  getPlantById(id : any): Observable<any[]> {
+    return this.httpClient.get<any[]>('http://localhost:3000/list_products?product_id=' + id);
   }
 }

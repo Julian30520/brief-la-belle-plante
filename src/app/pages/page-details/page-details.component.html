@@ -1,3 +1,25 @@
-<p (clickCardId) = "test($event)"></p>
-
-
+<div class="container" *ngIf="detailsPlant">
+    <div class="row my-4">
+        <img src="{{detailsPlant.product_url_picture}}" class="col-sm-5" style="width: 30rem;"
+            alt="Image de {{ detailsPlant.product_name }}">
+        <div class="col-sm-6">
+            <h4 style=" color: green;">{{detailsPlant.product_breadcrumb_label}}</h4>
+            <h2 class="card-title" style="font-size: 30px;">{{ detailsPlant.product_name }}</h2>
+            <div>
+            </div>
+            <div class="card-content">
+            </div>
+            <div style="border-style: solid; border-color: green; margin: auto; text-align: center;">
+                <p>
+                    Plante appréciant la chaleur et un bon réseau wifi,
+                    interconnectée avec son propriétaire et détestant les chats.
+                    Beaucoup de café et un peu d’eau. Ne pas sortir en extérieur, sauf en terrasse. Floraison totale au
+                    mois de juin.
+                </p>
+            </div>
+            <div class="card-content" style="font-weight: bold">{{ detailsPlant.product_unitprice_ati }} €
+            </div>
+            <div>Quantité restante : {{detailsPlant.product_qty}}</div>
+        </div>
+    </div>
+</div>
