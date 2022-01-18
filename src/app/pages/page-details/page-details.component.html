@@ -1,15 +1,20 @@
-<div class="container" *ngIf="detailsPlant">
-    <div class="row my-4">
+<div class="d-flex justify-content-center" *ngIf="detailsPlant">
+    <div class="d-flex align-items-center flex-column">
         <img src="{{detailsPlant.product_url_picture}}" class="col-sm-5" style="width: 30rem;"
             alt="Image de {{ detailsPlant.product_name }}">
-        <div class="col-sm-6">
+            <div class="card-content">
+                <app-avis-bar></app-avis-bar>
+            </div>
+        </div>
+        <div class="d-flex align-items-start flex-column mt-4 ">
             <h4 style=" color: green;">{{detailsPlant.product_breadcrumb_label}}</h4>
             <h2 class="card-title" style="font-size: 30px;">{{ detailsPlant.product_name }}</h2>
             <div>
             </div>
+            
             <div class="card-content">
             </div>
-            <div style="border-style: solid; border-color: green; margin: auto; text-align: center;">
+            <div style="border-style: solid; border-color: green; margin: auto; text-align: left; margin-right: 20%;">
                 <p>
                     Plante appréciant la chaleur et un bon réseau wifi,
                     interconnectée avec son propriétaire et détestant les chats.
@@ -17,9 +22,10 @@
                     mois de juin.
                 </p>
             </div>
-            <div class="card-content" style="font-weight: bold">{{ detailsPlant.product_unitprice_ati }} €
-            </div>
+            <a href="#" class="card-content" class="btn btn-success">Je l'ajoute à mon panier : {{  detailsPlant.product_unitprice_ati }} €</a>
+            
             <div>Quantité restante : {{detailsPlant.product_qty}}</div>
+            <a href="#" class="btn btn-success" style="margin-left: 75%" >Voir mon panier</a>
         </div>
-    </div>
+    
 </div>
