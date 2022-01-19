@@ -13,7 +13,9 @@ import { contains, includes } from 'underscore';
 })
 export class PageAccueilComponent implements OnInit {
   public listData: any[];
-  public listDataGlobal: any[];
+  public listPricePlant : any[];
+  public clickCounter : any;
+  public listDataGlobal : any[];
   public listDataFilter: any[];
   public listCategoriesFilter: string[];
   public dataFilterCategory : any;
@@ -29,9 +31,11 @@ export class PageAccueilComponent implements OnInit {
 
   constructor(private plantouneService: PlantouneService) {
     this.listData = [];
-    this.listDataGlobal = [];
-    this.listDataFilter = [];
     this.listCategoriesFilter = [];
+    this.listPricePlant = [];
+    this.listDataGlobal = [];
+    this.clickCounter = 0;
+    this.listDataFilter = [];
 
     this.rangeNumber = [];
     this.stateNumber = 0;
@@ -50,7 +54,6 @@ export class PageAccueilComponent implements OnInit {
     * constructor(plantouneService: PlantouneService) {
     *   this.plantouneService = plantouneService; }
     */
-
 
   ngOnInit(): void {
 
@@ -82,18 +85,26 @@ export class PageAccueilComponent implements OnInit {
         this.listCategoriesFilter = listUniqJsCategories;
         this.listData = [...listPlant];
         this.listData.length = 9;
-
+        this.listDataGlobal = [...listPlant]
+        
         console.log(this.listData);
       }
     )
   }
 
   onEventLike() {
-    this.plantouneService.plantLiked$.next('')
+    this.plantouneService.plantLiked$.next('');
   }
 
 onRecherchePlante(choix: any) {
 
+this.clickCounter ++
+console.log(this.clickCounter)
+  if (this.clickCounter %2) {
+    this.listData.sort((a, b) => parseFloat(a.product_price) - parseFloat(b.product_price));
+    }else{
+    this.listData.sort((a, b) => parseFloat(b.product_price) - parseFloat(a.product_price));
+    }
     const search = choix.target.value 
     console.log(search);
     this.listData = this.listDataGlobal.filter((plant) => {

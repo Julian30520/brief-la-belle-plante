@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,14 +10,21 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class CardPlanteComponent implements OnInit {
   @Input() plant: any;
   @Output() clickLike = new EventEmitter();
-  constructor() { }
+  @Output() clickCardId = new EventEmitter();
+
+  constructor(private router : Router) {}
 
   ngOnInit(): void {
   }
-
   onClickLike() {
     console.log('click');
     this.clickLike.emit();
   }
-
+  onGetId(id : string){
+    this.clickCardId.emit(id);
+    this.router.navigateByUrl('/details/'+ id);
+  }
 }
+
+
+//http://localhost:3000/list_products?product_id=952438
