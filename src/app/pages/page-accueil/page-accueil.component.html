@@ -14,7 +14,7 @@
 
         <div class="row">
             <div class="col" *ngFor="let product of listData">
-                <app-card-plante [plant]="product" [routerLink]="['/details/:productId']" (clickLike)="onEventLike()">
+                <app-card-plante [plant]="product" (clickLike)="onEventLike()">
                 </app-card-plante>
             </div>
         </div>
