@@ -1,10 +1,11 @@
 <div class="d-flex align-items-stretch">
-    <app-filter-side-bar [listCategories]="listCategoriesFilter"></app-filter-side-bar>
-
-    <div class="custom-main container p-3">
-        <input class="form-control" type="text" placeholder="Recherche ta belle plante"
-            aria-label="Input Recherche ta belle plante">
-
+    <app-filter-side-bar [listCategories]="listCategoriesFilter" (stateNumber)="onRatingFilter($event)" (rangeNumber)="onPriceFilter($event)" (checkCategory)="onListCategory($event)"></app-filter-side-bar>
+  <div class="custom-main container p-3">
+      <input class="form-control"
+          type="text"
+          placeholder="Recherche ta belle plante"
+          aria-label="Input Recherche ta belle plante"
+          (input)="onRecherchePlante($event)">
         <div class="py-3">
             Trier par :
             <button class="btn btn-outline-success btn-sm me-2" (click)="onPriceTri()">Prix</button>
