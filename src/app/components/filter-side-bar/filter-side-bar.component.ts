@@ -13,10 +13,16 @@ export class FilterSideBarComponent implements OnInit {
   @Output() reset = new EventEmitter();
   filterStateNumber: number = 0;
   public selectedCategory: string[];
+  public rangeArray: number[];
+  public minPrice : any;
+  public maxPrice : any;
 
   constructor() {
     this.listCategories = [];
     this.selectedCategory = [];
+    this.minPrice = 0;
+    this.maxPrice = 1000;
+    this.rangeArray = [];
   }
 
   ngOnInit(): void {
@@ -45,23 +51,31 @@ export class FilterSideBarComponent implements OnInit {
     this.filterStateNumber = stateNumber;
   }
 
-  onSendRating(): void {
+  onSendRating():void {
     this.stateNumber.emit(this.filterStateNumber);
   }
 
   onSendValues(minNum: any, maxNum: any): void {
-    if (minNum.value == '') {
-      minNum.value = 0;
+    if (minNum.value == "") {
+      if (maxNum.value == "") {
+        this.rangeArray = [parseFloat(this.minPrice), parseFloat(this.maxPrice)];
+        this.rangeNumber.emit(this.rangeArray);
+      } else {
+        this.rangeArray = [parseFloat(this.minPrice), parseFloat(maxNum.value)];
+        this.rangeNumber.emit(this.rangeArray)
+      }
+    } else {
+      if (maxNum.value == "") {
+        this.rangeArray = [parseFloat(minNum.value), parseFloat(this.maxPrice)];
+        this.rangeNumber.emit(this.rangeArray);
+      } else {
+        this.rangeArray = [parseFloat(minNum.value), parseFloat(maxNum.value)];
+        this.rangeNumber.emit(this.rangeArray);
+      }
     }
-    if (maxNum.value == '') {
-      maxNum.value = 1000;
-    }
-    let rangeArray: number[] = [parseFloat(minNum.value), parseFloat(maxNum.value)];
-    this.rangeNumber.emit(rangeArray);
   }
 
   onReset(): void {
     this.reset.emit();
-
   }
 }
