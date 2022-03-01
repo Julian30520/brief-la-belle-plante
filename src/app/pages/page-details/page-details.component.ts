@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { PlantouneService } from 'src/app/services/plantoune.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {PlantouneService} from 'src/app/services/plantoune.service';
 
 
 @Component({
@@ -33,10 +33,10 @@ export class PageDetailsComponent implements OnInit {
 
         // Faire appel au service et récuperer et executer la requete http  et lui fournir le productId
         this.plantouneService.getPlantById(productIdFromRoute).subscribe
-          (plant => {
-            this.detailsPlant = plant[0];
-            console.log(this.detailsPlant);
-          })
+        (plant => {
+          this.detailsPlant = plant[0];
+          console.log(this.detailsPlant);
+        })
 
 
       })

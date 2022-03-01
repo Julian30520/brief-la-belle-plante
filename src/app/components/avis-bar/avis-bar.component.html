@@ -1,9 +1,16 @@
-<div (mouseleave)="onMouseLeave()">
-    <app-icon *ngFor="let star of starStates; let starIndex = index" 
-    [iconName]="star.stateHoverUser ? 'star-fill' : 'star'"
-    [iconSize]="1.2"
-    [iconColor]="'#ffbf00'"
-    (mouseover)="onMouseOver(starIndex)"
-    (click)="onClickStar(starIndex)"
-    ></app-icon>
+<div (mouseover)="isOver = true" *ngIf="isOver === false">
+  <app-icon *ngFor="let star of starStates; let starIndex = index"
+            [iconName]="star.stateRatingProduct ? 'star-fill' : 'star'"
+            [iconSize]="1.2"
+            [iconColor]="'#ffbf00'"
+  ></app-icon>
+</div>
+<div (mouseleave)="onMouseLeave()" *ngIf="isOver">
+  <app-icon *ngFor="let star of starStates; let starIndex = index"
+            [iconName]="star.stateHoverUser ? 'star-fill' : 'star'"
+            [iconSize]="1.2"
+            [iconColor]="'#ffbf00'"
+            (mouseover)="onMouseOver(starIndex)"
+            (click)="onClickStar(starIndex)"
+  ></app-icon>
 </div>

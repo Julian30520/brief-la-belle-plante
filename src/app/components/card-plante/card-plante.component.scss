@@ -1,14 +1,15 @@
 .plant {
-    min-height: 22rem;
-    .card-body {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+  min-height: 22rem;
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
 
 .like {
-    position: absolute;
-    right: 0.7rem;
-    top: 0.5rem;
+  position: absolute;
+  right: 0.7rem;
+  top: 0.5rem;
 }

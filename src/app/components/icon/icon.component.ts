@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-icon',
@@ -9,7 +9,9 @@ export class IconComponent implements OnInit {
   @Input() iconName!: string;
   @Input() iconSize!: number;
   @Input() iconColor!: string;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

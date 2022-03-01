@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FilterSideBarComponent } from './filter-side-bar.component';
+import {FilterSideBarComponent} from './filter-side-bar.component';
 
 describe('FilterSideBarComponent', () => {
   let component: FilterSideBarComponent;
@@ -8,9 +8,9 @@ describe('FilterSideBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FilterSideBarComponent ]
+      declarations: [FilterSideBarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
